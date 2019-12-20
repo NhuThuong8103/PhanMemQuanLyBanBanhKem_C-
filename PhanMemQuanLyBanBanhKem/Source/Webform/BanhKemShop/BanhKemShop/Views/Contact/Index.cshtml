@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<section class="content-contact mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                <div class="contact-info">
+                    <ul class="p-0">
+                        <li><i class="fas fa-map-marker-alt"></i>140 Lê Trọng Tấn, TPHCM</li>
+                        <li><i class="fas fa-mobile-alt"></i>0969068625</li>
+                        <li><i class="far fa-envelope"></i><a href="mailto:sangnguyen07dhth@gmail.com">sangnguyen07dhth@gmail.com</a></li>
+                        <hr>
+                    </ul>
+                    <h4>
+                        <span>Liên hệ với chúng tôi</span>
+                    </h4>
+                </div>
+                <div class="contact-form">
+                    <input name="contact[name]" type="text" placeholder="Họ và tên"
+                           class="form-control" />
+                    <input name="contact[email]" type="text" placeholder="Email"
+                           class="form-control" />
+                    <textarea name="contact[content]" id="" rows="5" placeholder="Nội dung"
+                              class="form-control"></textarea>
+
+                    <button type="submit" class="btn btn-primary btn-contact">Gửi liên hệ</button>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-12">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15676.227665876126!2d106.61987096071243!3d10.806952850500497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be27d8b4f4d%3A0x92dcba2950430867!2sHCMC+University+of+Food+Industry!5e0!3m2!1sen!2s!4v1566494573917!5m2!1sen!2s" width="750" height="480" frameborder="0" style="border:0; border-radius: 10px" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</section>

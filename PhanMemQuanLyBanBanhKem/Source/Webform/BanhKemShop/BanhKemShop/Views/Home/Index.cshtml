@@ -1,0 +1,368 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section slider{
+    <section class="slide">
+        <div class="owl-carousel owl-theme">
+            <div class="item"><img src="~/assets/client/img/banhkem1.jpg" alt=""></div>
+            <div class="item"><img src="~/assets/client/img/banhkem2.jpg" alt=""></div>
+        </div>
+    </section>
+}
+<section class="home-2">
+    <div class="container">
+        <div class="heading">
+            <div class="main-title">
+                <h2>SẢN PHẨM NỔI BẬT</h2>
+            </div>
+            <div class="main-tab">
+                <div class="showed">Sản phẩm nổi bật</div>
+                <div class="main-nav">
+                    <div class="item active" data-tab="1">Sản phẩm nổi bật</div>
+                    <div class="item" data-tab="2">Sản phẩm hot</div>
+                    <div class="item" data-tab="3">Sản phẩm mới</div>
+                    <div class="item" data-tab="4">Sản phẩm bán chạy</div>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="content-item active" data-content="1">
+                <div class="row">
+                    @foreach (var item in ViewBag.DSBanhNoiBat)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 item">
+                            <figure>
+                                <div class="image">
+                                    <a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai">
+                                    @{
+                                        string base64String = Convert.ToBase64String(webservice.Intance.get_imageFile(item.hinhAnhBanhKem));
+                                    }
+                                        <img src="@String.Format("data:image/png;base64,{0}", base64String)" alt="">
+                                    </a>
+                                    <div class="action"><a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai"><em class="mdi mdi mdi-magnify-plus-outline"></em></a>
+                                    <a href="/them-gio-hang?productID=@item.maSizeBanh"><em class="mdi mdi-shopping"></em></a></div>
+                                </div>
+                                <figcaption>
+                                    <a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai">
+                                        <h5>@item.tenBanhKem</h5>
+                                    </a>
+                                    <div class="star"><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em></div>
+                                    <div class="price">
+                                        @if (item.giamGia > 0)
+                                        { //this.gia - ((double)(this.gia * Int32.Parse(this.giamgia)) / 100))
+                                            <div class="new">@(item.gia-((double)(item.gia * item.giamGia) / 100)) ₫</div>
+                                            <div class="old">@item.gia ₫</div>
+                                        }
+                                        else{ 
+                                            <div class="new">>@item.gia ₫</div>
+                                        }
+                                        
+                                    </div>
+                                    @if (item.giamGia > 0) { 
+                                        <div class="sale">Sale</div>
+                                    }
+                                </figcaption>
+                            </figure>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="content-item" data-content="2">
+                <div class="row">
+                    @foreach (var item in ViewBag.DSBanhNoiBat)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 item">
+                            <figure>
+                                <div class="image">
+                                    <a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai">
+                                        @{
+                                            string base64String = Convert.ToBase64String(webservice.Intance.get_imageFile(item.hinhAnhBanhKem));
+                                        }
+                                        <img src="@String.Format("data:image/png;base64,{0}", base64String)" alt="">
+                                    </a>
+                                    <div class="action"><a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai"><em class="mdi mdi mdi-magnify-plus-outline"></em></a><a href="/them-gio-hang?productID=@item.maSizeBanh"><em class="mdi mdi-shopping"></em></a></div>
+                                </div>
+                                <figcaption>
+                                    <a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai">
+                                        <h5>@item.tenBanhKem</h5>
+                                    </a>
+                                    <div class="star"><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em></div>
+                                    <div class="price">
+                                        @if (item.giamGia > 0)
+                                        { //this.gia - ((double)(this.gia * Int32.Parse(this.giamgia)) / 100))
+                                            <div class="new">@(item.gia - ((double)(item.gia * item.giamGia) / 100)) ₫</div>
+                                            <div class="old">@item.gia ₫</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="new">>@item.gia ₫</div>
+                                        }
+
+                                    </div>
+                                    @if (item.giamGia > 0)
+                                    {
+                                        <div class="sale">Sale</div>
+                                    }
+                                </figcaption>
+                            </figure>
+                        </div>
+                      }
+                </div>
+            </div>
+            <div class="content-item" data-content="3"></div>
+            <div class="content-item" data-content="4"></div>
+        </div>
+    </div>
+</section>
+<section class="home-3">
+    <div class="container">
+        <div class="main-title tac line">
+            <h2>sản phẩm bán chạy</h2>
+        </div>
+        <div class="main-slide" data-slide>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach (var item in ViewBag.DSBanhBanChay)
+                    {
+                        <div class="swiper-slide">
+                            <div class="product-item">
+                                <figure>
+                                    <div class="image">
+                                        <a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai">
+                                        @{
+                                            string base64String = Convert.ToBase64String(webservice.Intance.get_imageFile(item.hinhAnhBanhKem));
+                                        }
+                                        <img src="@String.Format("data:image/png;base64,{0}", base64String)" alt="">
+                                        </a>
+                                        <div class="action"><a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai"><em class="mdi mdi mdi-magnify-plus-outline"></em></a><a href="/them-gio-hang?productID=@item.maSizeBanh"><em class="mdi mdi-shopping"></em></a></div>
+                                    </div>
+                                    <figcaption>
+                                        <a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai">
+                                            <h5>@item.tenBanhKem</h5>
+                                        </a>
+                                        <div class="star"><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em></div>
+                                        <div class="price">
+                                            @if (item.giamGia > 0)
+                                            {
+                                                <div class="new">@(item.gia - ((double)(item.gia * item.giamGia) / 100)) ₫</div>
+                                                <div class="old">@item.gia ₫</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="new">>@item.gia ₫</div>
+                                            }
+
+                                        </div>
+                                        @if (item.giamGia > 0)
+                                        {
+                                            <div class="sale">Sale</div>
+                                        }
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    }
+                    
+                </div>
+            </div>
+            <div class="swiper-nav">
+                <div class="swiper-btn swiper-prev"><em class="mdi mdi-chevron-left"></em></div>
+                <div class="swiper-btn swiper-next"><em class="mdi mdi-chevron-right"></em></div>
+            </div>
+        </div>
+        <figure><a href="#"><img src="/assets/client/img/banner_qc.png" alt=""></a></figure>
+    </div>
+</section>
+<section class="home-5">
+    <div class="container">
+        <div class="main-title tac line">
+            <h2>sản phẩm hot</h2>
+        </div>
+        <div class="main-slide" data-slide>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach (var item in ViewBag.DSBanhHot)
+                    {
+                        <div class="swiper-slide">
+                            <div class="product-item">
+                                <figure>
+                                    <div class="image">
+                                        <a href="/chi-tiet-san-pham- @item.maBanhKem -@item.maLoai">
+                                            @{
+                                                string base64String = Convert.ToBase64String(webservice.Intance.get_imageFile(item.hinhAnhBanhKem));
+                                            }
+                                            <img src="@String.Format("data:image/png;base64,{0}", base64String)" alt="">
+                                        </a>
+                                        <div class="action"><a href="/chi-tiet-san-pham-@item.maBanhKem-@item.maLoai"><em class="mdi mdi mdi-magnify-plus-outline"></em></a><a href="/them-gio-hang?productID=@item.maSizeBanh"><em class="mdi mdi-shopping"></em></a></div>
+                                    </div>
+                                    <figcaption>
+                                        <a href="/chi-tiet-san-pham-@item.maBanhKem-@item.maLoai">
+                                            <h5>@item.tenBanhKem</h5>
+                                        </a>
+                                        <div class="star"><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em></div>
+                                        <div class="price">
+                                            @if (item.giamGia > 0)
+                                            {
+                                                <div class="new">@(item.gia - ((double)(item.gia * item.giamGia) / 100)) ₫</div>
+                                                <div class="old">@item.gia ₫</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="new">>@item.gia ₫</div>
+                                            }
+
+                                        </div>
+                                        @if (item.giamGia > 0)
+                                        {
+                                            <div class="sale">Sale</div>
+                                        }
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                                                }
+                </div>
+            </div>
+            <div class="swiper-nav">
+                <div class="swiper-btn swiper-prev"><em class="mdi mdi-chevron-left"></em></div>
+                <div class="swiper-btn swiper-next"><em class="mdi mdi-chevron-right"></em></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="home-4">
+    <div class="container">
+        <div class="main-title tac">
+            <h2>Tin tức mới nhất</h2>
+        </div>
+        <div class="news-slide">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="news-item">
+                            <a href="javascript:void(0)">
+                                <div class="item">
+                                    <div class="top-item">
+                                        <div class="image"><img src="/assets/client/img/news/3.jpg" alt=""></div>
+                                        <div class="time">
+                                            <h5>7</h5>
+                                            <p>Tháng 7</p>
+                                        </div>
+                                    </div>
+                                    <div class="bot-item">
+                                        <div class="top-content">
+                                            <h3>CAKE OF THE MONTH - BÁNH MÌ GỐI GIẢM_TỚI_30% TOÀN HỆ THỐNG</h3>
+                                            <p><em class="mdi mdi-account"></em> Đăng bởi: Như Thương</p>
+                                        </div>
+                                        <div class="bot-content">
+                                            <p>🌿 Mùa Du Lịch cầm bịch Bánh Mì chu du khắp nơi! Đi chơi xa hay ăn sáng, ăn nhẹ tại nhàs ...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="news-item">
+                            <a href="javascript:void(0)">
+                                <div class="item">
+                                    <div class="top-item">
+                                        <div class="image"><img src="/assets/client/img/news/1.jpg" alt=""></div>
+                                        <div class="time">
+                                            <h5>27</h5>
+                                            <p>Tháng 5</p>
+                                        </div>
+                                    </div>
+                                    <div class="bot-item">
+                                        <div class="top-content">
+                                            <h3>THÁNG 5 RỰC RỠ - TRÀN NGẬP SẮC MÀU</h3>
+                                            <p><em class="mdi mdi-account"></em> Đăng bởi: VSN</p>
+                                        </div>
+                                        <div class="bot-content">
+                                            <p> 🍓Ưu đãi đặc biệt tháng 5 này - Giảm 10% bánh Seasonal Fruit Cake for 6 pax, giá chỉ còn 198k (giá gốc 220k) ...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="news-item">
+                            <a href="javascript:void(0)">
+                                <div class="item">
+                                    <div class="top-item">
+                                        <div class="image"><img src="/assets/client/img/news/1.jpg" alt=""></div>
+                                        <div class="time">
+                                            <h5>27</h5>
+                                            <p>Tháng 5</p>
+                                        </div>
+                                    </div>
+                                    <div class="bot-item">
+                                        <div class="top-content">
+                                            <h3>THÁNG 5 RỰC RỠ - TRÀN NGẬP SẮC MÀU</h3>
+                                            <p><em class="mdi mdi-account"></em> Đăng bởi: VSN</p>
+                                        </div>
+                                        <div class="bot-content">
+                                            <p> 🍓Ưu đãi đặc biệt tháng 5 này - Giảm 10% bánh Seasonal Fruit Cake for 6 pax, giá chỉ còn 198k (giá gốc 220k) ...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="news-item">
+                            <a href="javascript:void(0)">
+                                <div class="item">
+                                    <div class="top-item">
+                                        <div class="image"><img src="/assets/client/img/news/2.jpg" alt=""></div>
+                                        <div class="time">
+                                            <h5>2</h5>
+                                            <p>Tháng 6</p>
+                                        </div>
+                                    </div>
+                                    <div class="bot-item">
+                                        <div class="top-content">
+                                            <h3>THÁNG 6 RỘN RÀNG - NGẬP TRÀN NIỀM VUI</h3>
+                                            <p><em class="mdi mdi-account"></em> Đăng bởi: Văn Sang</p>
+                                        </div>
+                                        <div class="bot-content">
+                                            <p> 🌿 Chào đón tháng 6 - Tháng của những niềm vui, Nguyễn Sơn dành tặng ưu đãi đặc biệt - #Giảm_10% ...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="news-item">
+                            <a href="javascript:void(0)">
+                                <div class="item">
+                                    <div class="top-item">
+                                        <div class="image"><img src="/assets/client/img/news/3.jpg" alt=""></div>
+                                        <div class="time">
+                                            <h5>7</h5>
+                                            <p>Tháng 7</p>
+                                        </div>
+                                    </div>
+                                    <div class="bot-item">
+                                        <div class="top-content">
+                                            <h3>CAKE OF THE MONTH - BÁNH MÌ GỐI GIẢM_TỚI_30% TOÀN HỆ THỐNG</h3>
+                                            <p><em class="mdi mdi-account"></em> Đăng bởi: Như Thương</p>
+                                        </div>
+                                        <div class="bot-content">
+                                            <p>🌿 Mùa Du Lịch cầm bịch Bánh Mì chu du khắp nơi! Đi chơi xa hay ăn sáng, ăn nhẹ tại nhàs ...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

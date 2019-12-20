@@ -1,0 +1,31 @@
+﻿@{ 
+    var listTL = webservice.Intance.getListTheLoaiBanh_Website();
+}
+<ul class="item-big">
+    <li class="nav-item active"><a href="/">TRANG CHỦ</a></li>
+    <li class="nav-item"><a href="/gioi-thieu">GIỚI THIỆU</a></li>
+    <li class="nav-item pad-right">
+        <a href="/san-pham">
+            SẢN PHẨM
+            <div class="fas fa-caret-down"></div>
+        </a>
+        <ul class="hidden-menu-1">
+            <li class="hidden-menu rl">
+                <a class="menu-1" href="#">
+                    Sản phẩm nổi bật
+                    <div class="fas fa-caret-right"></div>
+                </a>
+                <ul class="small-menu-hidden">
+                    @foreach (var item in listTL)
+                    {
+                        <li class="hidden-menu-2"><a class="menu-2" href="/the-loai-san-pham-@item.MaLoai">@item.TenLoai</a></li>
+                    }
+                </ul>
+            </li>
+            <li class="hidden-menu"><a class="menu-1" href="/san-pham-hot">Sản phẩm hot</a></li>
+            <li class="hidden-menu"><a class="menu-1" href="/san-pham-ban-chay">Sản phẩm bán chạy </a></li>
+        </ul>
+    </li>
+    <li class="nav-item"><a href="#">TIN TỨC</a></li>
+    <li class="nav-item"><a href="/lien-he">LIÊN HỆ</a></li>
+</ul>

@@ -1,0 +1,284 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var ChiTietBanhKem = webservice.Intance.getTTBanhKem_Website(ViewBag.IDBanh);
+
+    var Size = webservice.Intance.getSize_TTBanhKem(ViewBag.IDBanh);
+
+    var dsbanhchitiet = webservice.Intance.getDanhSachBanhKemChiTiet(ViewBag.IDLoai);
+}
+
+<section class="section-breadcrum">
+    <div class="container">
+        <div class="row">
+            <div class="breadcr">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mt-2">
+                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="sanpham.html">Sản phẩm</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">CTSP</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <hr>
+    </div>
+</section>
+<section class="section-detail mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <input type="hidden" id="mabanh" name="mabanh" value="@ChiTietBanhKem.MaBanhKem" />
+                <div class="product-img">
+                @{
+                    string base64String = Convert.ToBase64String(webservice.Intance.get_imageFile(ChiTietBanhKem.HinhAnh));
+                }
+                    <img src="@String.Format("data:image/png;base64,{0}", base64String)" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="name-product">
+                    <h3>@ChiTietBanhKem.TenBanhKem</h3>
+                </div>
+                <div class="star-product">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="price-product-detail mt-2">
+                    <p style="text-decoration:line-through" class="price-giamgia">@ChiTietBanhKem.Gia ₫</p>
+                    <span class="price">@(ChiTietBanhKem.Gia - ((int)(ChiTietBanhKem.Gia * int.Parse(ChiTietBanhKem.TenGiamGia)) / 100)) ₫ </span>
+                </div>
+                <div class="size-product mt-4">
+                    <h5>Chọn size: </h5>
+                    <select class="form-control select-size" style="width: 50%" name="size">
+                        @foreach (var item in Size) {
+                            <option value="@item.MaSize">@item.TenSize</option>
+                        }
+                    </select>
+                </div>
+                <div class="input-group number-spinner mt-4">
+                    <h5 style="margin-right: 10px">Số lượng:</h5>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" data-dir="dwn"><i class="fas fa-minus"></i></button>
+                    </span>
+                    <input type="text" class="form-control text-center number-count" value="1">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" data-dir="up"><i class="fas fa-plus"></i></button>
+                    </span>
+                </div>
+                <div class="btn-submit mt-5">
+                    <input type="submit" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalLong" value="Thêm vào giỏ hàng">
+                </div>
+                <div class="mt-4">
+                    <span>
+                        Gọi đặt mua: <a href="tel:0969068625">0969068625</a> để nhanh chóng đặt hàng
+                    </span>
+                </div>
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">
+                                    Giỏ hàng của bạn có 3 sản phẩm
+                                    <i class="far fa-heart" style="color: red"></i>
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="head1" scope="col">Hình</th>
+                                            <th class="head2 d-none d-lg-block" scope="col">Tên SP</th>
+                                            <th scope="col">Đơn giá</th>
+                                            <th scope="col">Số lượng</th>
+                                            <th scope="col">Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row"><img src="img/product-2.png" alt=""></th>
+                                            <td class="d-none d-lg-block">
+                                                <div class="item-name">Túi xách da dáng làn</div>
+                                                <div class="remove-product-cart">
+                                                    <a href="javasript:void(0)">
+                                                        <i class="far fa-trash-alt mr-2"></i>Bỏ sản phẩm
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>2.200.000₫</td>
+                                            <td>2</td>
+                                            <td>4.400.000₫</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><img src="img/product-2.png" alt=""></th>
+                                            <td class="d-none d-lg-block">
+                                                <div class="item-name">Túi xách da dáng làn</div>
+                                                <div class="remove-product-cart">
+                                                    <a href="javasript:void(0)">
+                                                        <i class="far fa-trash-alt mr-2"></i>Bỏ sản phẩm
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>2.200.000₫</td>
+                                            <td>2</td>
+                                            <td>4.400.000₫</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><img src="img/product-2.png" alt=""></th>
+                                            <td class="d-none d-lg-block">
+                                                <div class="item-name">Túi xách da dáng làn</div>
+                                                <div class="remove-product-cart">
+                                                    <a href="javasript:void(0)">
+                                                        <i class="far fa-trash-alt mr-2"></i>Bỏ sản phẩm
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>2.200.000₫</td>
+                                            <td>2</td>
+                                            <td>4.400.000₫</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="a-right">
+                                    <span class="total">
+                                        Tổng tiền:
+                                        <span class="total-price">62.240.000₫</span>
+                                    </span>
+                                </div>
+                                <br>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Thanh toán</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        $('.select-size').on('change', function () {
+            var masize = this.value;
+            var mabanh = $('#mabanh').val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("getGiaTheoSize")',
+                data: JSON.stringify({
+                    'idsize': masize,
+                    'idbanh': mabanh
+                }),
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    var gia = Number(result.gia);
+                    var giamgia = Number(result.giamgia);
+                    var giamoi = gia - ((gia * giamgia) / 100);
+                    $('.section-detail .price-giamgia').text(gia + '₫');
+                    $('.section-detail .price').text(giamoi + '₫');
+
+                },
+                error: function () {
+                    alert("lỗi sml rồi nè m");
+                }
+            });
+        });
+    });
+</script>
+<!-- Tabs -->
+<section id="tabs " class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 ">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Mô tả sản phẩm</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Khách hàng nhận xét</a>
+                    </div>
+                </nav>
+                <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        @ChiTietBanhKem.MoTa
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <button type="button" class="btn btn-danger">Viết đánh giá</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ./Tabs -->
+<section class="relate-product">
+    <div class="container">
+        <div class="main-title tac line">
+            <h2>Sản phẩm liên quan</h2>
+        </div>
+        <div class="main-slide" data-slide>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach (var item in dsbanhchitiet)
+                    {
+                        <div class="swiper-slide">
+                            <div class="product-item">
+                                <figure>
+                                    <div class="image">
+                                        <a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai">
+                                            @{
+                                                string base64Stringsilde = Convert.ToBase64String(webservice.Intance.get_imageFile(item.hinhAnhBanhKem));
+                                            }
+                                            <img src="@String.Format("data:image/png;base64,{0}", base64Stringsilde)" alt="">
+                                        </a>
+                                        <div class="action">
+                                            <a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai"><em class="mdi mdi mdi-magnify-plus-outline"></em></a>
+                                            <a href="javascript:void(0)"><em class="mdi mdi-shopping"></em></a>
+                                        </div>
+                                    </div>
+                                    <figcaption>
+                                        <a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai">
+                                            <h5>@item.tenBanhKem</h5>
+                                        </a>
+                                        <div class="star"><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em></div>
+                                        <div class="price">
+                                            @if (item.giamGia > 0)
+                                            { //this.gia - ((double)(this.gia * Int32.Parse(this.giamgia)) / 100))
+                                                <div class="new">@(item.gia - ((double)(item.gia * item.giamGia) / 100)) ₫</div>
+                                                <div class="old">@item.gia ₫</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="new">>@item.gia ₫</div>
+                                            }
+
+                                        </div>
+                                        @if (item.giamGia > 0)
+                                        {
+                                            <div class="sale">Sale</div>
+                                        }
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="swiper-nav">
+                <div class="swiper-btn swiper-prev"><em class="mdi mdi-chevron-left"></em></div>
+                <div class="swiper-btn swiper-next"><em class="mdi mdi-chevron-right"></em></div>
+            </div>
+        </div>
+    </div>
+</section>
+

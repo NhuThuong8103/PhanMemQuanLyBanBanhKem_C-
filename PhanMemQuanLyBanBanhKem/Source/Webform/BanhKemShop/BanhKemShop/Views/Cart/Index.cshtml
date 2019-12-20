@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var cart = Session["Cart"];
+    int CountCart = 0;
+    if (cart != null)
+    {
+        var list = (List<BanhKemShop.Models.CartItem>)cart;
+
+        CountCart = list.Count;
+    }
+}
+
+<main>
+    <section class="section-breadcrum">
+        <div class="container">
+            <div class="row">
+                <div class="breadcr">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mt-2">
+                            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>   
+
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </section>
+    <section class="cart-page">
+        <div class="container">
+            <div class="header-cart">
+                <h4>
+                    Giỏ hàng của bạn
+                    <i class="far fa-heart" style="color: red"></i>
+                    <span>(<span class="count-cart">@CountCart</span> sản phẩm)</span>
+                </h4>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-12">
+                    <div class="bg">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="head1" scope="col">Hình</th>
+                                    <th scope="col" class="d-none d-lg-block">Tên SP</th>
+                                    <th scope="col" class="d-md-none">Thao tác</th>
+                                    <th scope="col">Đơn giá</th>
+                                    <th scope="col" style="">Số lượng</th>
+                                    <th scope="col" class="d-none d-lg-block">T/Tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ 
+                                    if (ViewBag.ListCart != null)
+                                    {
+                                        foreach (var item in ViewBag.ListCart)
+                                        {
+                                            var chitiet = webservice.Intance.getTTGioHang_Website(item.productId);
+                                            string base64String = Convert.ToBase64String(webservice.Intance.get_imageFile(chitiet.hinhAnhSP));
+                                            <tr>
+                                                <th scope="row"><img src="@String.Format("data:image/png;base64,{0}", base64String)" alt=""></th>
+                                                <td>
+                                                    <div class="item-name d-none d-lg-block">@chitiet.tenSP</div>
+                                                    <div class="remove-product-cart">
+                                                        <a href="javascript:void(0)">
+                                                            <i class="far fa-trash-alt mr-2"></i>Xóa
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td>@(chitiet.donGia - ((int)(chitiet.donGia * int.Parse(chitiet.giamGia)) / 100))₫</td>
+                                                <td>
+                                                    <div class="input-group number-spinner">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-default" data-dir="dwn"><i class="fas fa-minus"></i></button>
+                                                        </span>
+                                                        <input type="text" class="form-control text-center number-count" value="@item.quantity">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-default" data-dir="up"><i class="fas fa-plus"></i></button>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td class="d-none d-lg-block">@((chitiet.donGia - ((int)(chitiet.donGia * int.Parse(chitiet.giamGia)) / 100)) * item.quantity)₫</td>
+                                            </tr>
+                                            }
+                                        }
+                                    }
+                            </tbody>
+                        </table>
+                        <button class="btn btn-danger"> Tiếp tục mua hàng</button>
+                        <a href="#"><button class="btn btn-danger " style="float: right;">Cập nhật giỏ hàng</button></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                    <div class="bg">
+                        <div class="thanh-tien mb-3">
+                            Thành tiền: <span class="total-price">62.240.000₫</span></span>
+                        </div>
+                        <a href="thanhtoan.html"><button class="btn btn-danger btn-thanh-toan"> Tiến hành thanh toán</button></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+

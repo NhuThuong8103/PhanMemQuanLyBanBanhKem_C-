@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = "ProductBanChay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var listTL = webservice.Intance.getListTheLoaiBanh_Website();
+
+    var dsbanhbanchay= webservice.Intance.getDanhSachBanhKemBanChay();
+
+}
+
+<section class="content-main-product">
+    <div class="container">
+        <div class="row">
+            <div class="breadcr">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mt-2">
+                        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Sản phẩm Bán Chạy</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="product-content mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-12 d-none d-lg-block">
+                    <div class="head-title mb-3">
+                        <h2>Danh mục</h2>
+                    </div>
+                    <nav class='animated bounceInDown'>
+                        <ul>
+                            <li><a href='/'>Trang chủ</a></li>
+                            <li><a href='/gioi-thieu'>Giới thiệu</a></li>
+                            <li class='sub-menu'>
+                                <a href='#'>Sản phẩm<i class='fas fa-angle-down right'></i></a>
+                                <ul>
+                                    <li class='sub-menu'>
+                                        <a href='#'>Sản phẩm nổi bật<i class='fas fa-angle-down right'></i></a>
+                                        <ul>
+                                            @foreach (var item in listTL)
+                                            {
+                                                <li><a href='/the-loai-san-pham-@item.MaLoai'>@item.TenLoai</a></li>
+                                            }
+                                        </ul>
+                                    </li>
+                                    <li><a href='/san-pham-hot'>Sản phẩm hot</a></li>
+                                    <li><a href='/san-pham-ban-chay'>Sản phẩm bán chạy</a></li>
+                                </ul>
+                            </li>
+                            <li><a href='#'>Tin tức</a></li>
+                            <li><a href='/lien-he'>Liên hệ</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="sidebar-hidden d-lg-none">
+                    <nav>
+                        <a href="" id="menuToggle" title="show menu">
+                            <span class="navClosed">
+                                <i></i> <!-- show menu sidebar -->
+                            </span>
+                        </a>
+                        <div class="head-title mb-3">
+                            <h2>Danh mục</h2>
+                        </div>
+                        <ul>
+                            <li><a href='/'>Trang chủ</a></li>
+                            <li><a href='/gioi-thieu'>Giới thiệu</a></li>
+                            <li class='sub-menu'>
+                                <a href='#'>Sản phẩm <i class='fas fa-angle-down right'></i></a>
+                                <ul>
+                                    <li class='sub-menu'>
+                                        <a href=''>Sản phẩm nổi bật <i class='fas fa-angle-down right'></i></a>
+                                        <ul>
+                                            @foreach (var item in listTL)
+                                            {
+                                                <li><a href='/the-loai-san-pham-@item.MaLoai'>@item.TenLoai</a></li>
+                                            }
+                                        </ul>
+                                    </li>
+                                    <li><a href='/san-pham-hot'>Sản phẩm hot</a></li>
+                                    <li><a href='/san-pham-ban-chay'>Sản phẩm bán chạy</a></li>
+                                </ul>
+                            </li>
+                            <li><a href='#'>Tin tức</a></li>
+                            <li><a href='/lien-he'>Liên hệ</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 col-12">
+                    <div class="products">
+                        <div class="sortPagibar mb-4">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                                    <div class="head-title-filter">
+                                        <h2>Tất cả sản phẩm</h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="product-sort">
+                                        <h3>Ưu tiên xem: </h3>
+                                        <ul>
+                                            <li><a><i></i>Giảm giá</a></li>
+                                            <li data-value="l2h"><a><i></i>Giá tăng dần</a></li>
+                                            <li data-value="h2l"><a><i></i>Giá giảm dần</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="products-list">
+                            <!-- <div class="container"> -->
+                            <div class="row product-grid">
+                                @foreach (var item in dsbanhbanchay)
+                                {
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-12 mt-2 product-item" data-price="@(item.gia - ((double)(item.gia * item.giamGia) / 100))">
+                                        <figure>
+                                            <div class="image">
+                                                <a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai">
+                                                    @{
+                                                        string base64String = Convert.ToBase64String(webservice.Intance.get_imageFile(item.hinhAnhBanhKem));
+                                                    }
+                                                    <img src="@String.Format("data:image/png;base64,{0}", base64String)" alt="">
+                                                </a>
+                                                <div class="action"><a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai"><em class="mdi mdi mdi-magnify-plus-outline"></em></a><a href="javascript:void(0)"><em class="mdi mdi-shopping"></em></a></div>
+                                            </div>
+                                            <figcaption>
+                                                <a href="/chi-tiet-san-pham-@item.maBanhKem -@item.maLoai">
+                                                    <h5>@item.tenBanhKem</h5>
+                                                </a>
+                                                <div class="star"><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em><em class="far fa-star"></em></div>
+                                                <div class="price">
+                                                    @if (item.giamGia > 0)
+                                                    {
+                                                        <div class="new">@(item.gia - ((double)(item.gia * item.giamGia) / 100)) ₫</div>
+                                                        <div class="old">@item.gia ₫</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="new">>@item.gia ₫</div>
+                                                    }
+
+                                                </div>
+                                                @if (item.giamGia > 0)
+                                                {
+                                                    <div class="sale">Sale</div>
+                                                }
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                  }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+      $(document).ready(function()
+      {
+       $("#tab").pagination({
+         items: 9,
+         contents: 'product-grid',
+         previous: 'Previous',
+         next: 'Next',
+         position: 'bottom',
+       });
+      });
+</script>
+
+
+
