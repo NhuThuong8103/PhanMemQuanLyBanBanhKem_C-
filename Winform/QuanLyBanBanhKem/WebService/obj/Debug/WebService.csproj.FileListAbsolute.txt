@@ -1,0 +1,29 @@
+C:\Users\Van Sang Nguyen\Desktop\ProjectWF\ShopCakeManager\WebService\bin\WebService.dll
+C:\Users\Van Sang Nguyen\Desktop\ProjectWF\ShopCakeManager\WebService\bin\WebService.pdb
+C:\Users\Van Sang Nguyen\Desktop\ProjectWF\ShopCakeManager\WebService\obj\Debug\WebService.csprojResolveAssemblyReference.cache
+C:\Users\Van Sang Nguyen\Desktop\ProjectWF\ShopCakeManager\WebService\obj\Debug\WebService.dll
+C:\Users\Van Sang Nguyen\Desktop\ProjectWF\ShopCakeManager\WebService\obj\Debug\WebService.pdb
+C:\Users\Van Sang Nguyen\Desktop\Project\ShopCakeManager\WebService\bin\WebService.dll
+C:\Users\Van Sang Nguyen\Desktop\Project\ShopCakeManager\WebService\bin\WebService.pdb
+C:\Users\Van Sang Nguyen\Desktop\Project\ShopCakeManager\WebService\obj\Debug\WebService.dll
+C:\Users\Van Sang Nguyen\Desktop\Project\ShopCakeManager\WebService\obj\Debug\WebService.pdb
+C:\Users\Van Sang Nguyen\Desktop\Project\ShopCakeManager\WebService\obj\Debug\WebService.csprojResolveAssemblyReference.cache
+C:\Users\Van Sang Nguyen\Desktop\ShopCakeManager\WebService\bin\WebService.dll
+C:\Users\Van Sang Nguyen\Desktop\ShopCakeManager\WebService\bin\WebService.pdb
+C:\Users\Van Sang Nguyen\Desktop\ShopCakeManager\WebService\obj\Debug\WebService.dll
+C:\Users\Van Sang Nguyen\Desktop\ShopCakeManager\WebService\obj\Debug\WebService.pdb
+D:\banhkem_new\ShopCakeManager\WebService\bin\WebService.dll
+D:\banhkem_new\ShopCakeManager\WebService\bin\WebService.pdb
+D:\banhkem_new\ShopCakeManager\WebService\obj\Debug\WebService.csprojResolveAssemblyReference.cache
+D:\banhkem_new\ShopCakeManager\WebService\obj\Debug\WebService.dll
+D:\banhkem_new\ShopCakeManager\WebService\obj\Debug\WebService.pdb
+D:\backup-github-WF\WebService\bin\WebService.dll
+D:\backup-github-WF\WebService\bin\WebService.pdb
+D:\backup-github-WF\WebService\obj\Debug\WebService.csprojResolveAssemblyReference.cache
+D:\backup-github-WF\WebService\obj\Debug\WebService.dll
+D:\backup-github-WF\WebService\obj\Debug\WebService.pdb
+C:\Users\Van Sang Nguyen\Desktop\backup-github-WF\WebService\bin\WebService.dll
+C:\Users\Van Sang Nguyen\Desktop\backup-github-WF\WebService\bin\WebService.pdb
+C:\Users\Van Sang Nguyen\Desktop\backup-github-WF\WebService\obj\Debug\WebService.dll
+C:\Users\Van Sang Nguyen\Desktop\backup-github-WF\WebService\obj\Debug\WebService.pdb
+C:\Users\Van Sang Nguyen\Desktop\backup-github-WF\WebService\obj\Debug\WebService.csprojResolveAssemblyReference.cache
